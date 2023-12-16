@@ -4,7 +4,7 @@ apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
   name: {{ .Values.bgp.ipAddressPool.name }}
-  namespace: {{ .Values.bgp.ipAddressPool.namespace }}
+  namespace: {{ .Values.metallb.namespace }}
 spec:
   addresses:
   {{- range .Values.l2.ipAddressPool.addresses }}
@@ -16,7 +16,7 @@ apiVersion: metallb.io/v1beta2
 kind: BGPPeer
 metadata:
   name: {{ .Values.bgp.bgpPeer.name }}
-  namespace: {{ .Values.bgp.bgpPeer.namespace }}
+  namespace: {{ .Values.metallb.namespace }}
 spec:
   myASN: {{ .Values.bgp.bgpPeer.myASN }}
   peerASN: {{ .Values.bgp.bgpPeer.peerASN }}
@@ -26,5 +26,5 @@ apiVersion: metallb.io/v1beta1
 kind: BGPAdvertisement
 metadata:
   name: {{ .Values.bgp.bgpAdvertisement.name }}
-  namespace: {{ .Values.bgp.bgpAdvertisement.namespace }}
+  namespace: {{ .Values.metallb.namespace }}
 {{- end }}
