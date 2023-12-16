@@ -33,5 +33,6 @@ spec:
         backend:
           service:
             name: {{ .Values.service.name }}
+            namespace: {{ .Values.service.namespace }}
             port: 
               number: {{ .Values.service.port }}

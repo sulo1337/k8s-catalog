@@ -5,6 +5,7 @@ ingress:
   class: nginx
 service:
   name: ingress-domain-svc
+  namespace: ingress-domain-svc-namespace
   port: 80
 certificate:
   name: ingress-domain-cert
