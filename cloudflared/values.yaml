@@ -1,0 +1,10 @@
+cloudflared:
+  image: cloudflare/cloudflared:latest
+  replicaCount: 1
+  name: cloudflared
+  namespace: cloudflared
+  tunnel:
+    name: my-tunnel
+    hostname: example.com
+    service: http://example-svc.example-ns.svc.cluster.local:8080
+    secret: cloudflared-credentials

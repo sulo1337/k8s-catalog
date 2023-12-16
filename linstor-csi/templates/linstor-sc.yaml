@@ -1,0 +1,13 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ .Values.storageClass.name }}
+provisioner: linstor.csi.linbit.com
+allowVolumeExpansion: {{ .Values.storageClass.allowVolumeExpansion }}
+parameters:
+  linstor.csi.linbit.com/placementCount: {{ .Values.storageClass.placementCount }}
+  linstor.csi.linbit.com/storagePool: {{ .Values.storageClass.storagePool }}
+  linstor.csi.linbit.com/resourceGroup: {{ .Values.storageClass.resourceGroup }}
+  csi.storage.k8s.io/fstype: {{ .Values.storageClass.fstype }}
+  # You can override LINSTOR properties by adding the property.linstor.csi.linbit.com prefix:
+  property.linstor.csi.linbit.com/DrbdOptions/auto-quorum: suspend-io

@@ -1,0 +1,28 @@
+metallb:
+  existingConfigMap: metallb-config
+bgp:
+  enabled: false
+  ipAddressPool:
+    name: bgp-pool
+    namespace: metallb-system
+    address: 192.168.100.0/24
+    avoidBuggyIPs: true
+  bgpPeer:
+    name: bgppeer
+    namespace: metallb-system
+    myASN: 64521
+    peerASN: 64520
+    peerAddress: 192.168.10.1
+  bgpAdvertisement:
+    name: bgpad
+    namespace: metallb-system
+
+l2:
+  enabled: false
+  ipAddressPool:
+    name: l2-pool
+    namespace: metallb-system
+    address: 192.168.100.0/24
+  l2Advertisement:
+    name: l2ad
+    namespace: metallb-system

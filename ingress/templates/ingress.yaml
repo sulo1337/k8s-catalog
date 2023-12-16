@@ -1,0 +1,37 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: example-tls
+  namespace: default
+spec:
+  secretName: example-tls
+  issuerRef:
+    name: example-issuer
+    kind: ClusterIssuer
+  commonName: {{ .Values.fqdn }}
+  dnsNames:
+  - {{ .Values.fqdn }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress  
+metadata:
+  name: example-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "nginx" 
+spec:
+  tls:
+  - hosts:
+    - {{ .Values.fqdn }}
+    secretName: example-tls
+  rules:
+  - host: {{ .Values.fqdn }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: example-service
+            port: 
+              number: 80

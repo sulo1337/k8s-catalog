@@ -1,0 +1,8 @@
+linstor-ip: http://192.168.10.100:3370
+storageClass:
+  name: linstor-sc
+  allowVolumeExpansion: true
+  placementCount: 1
+  storagePool: default
+  resourceGroup: default
+  fstype: ext4

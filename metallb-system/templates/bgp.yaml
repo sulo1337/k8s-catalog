@@ -1,0 +1,28 @@
+{{- if .Values.bgp.enabled -}}
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: {{ .Values.bgp.ipAddressPool.name }}
+  namespace: {{ .Values.bgp.ipAddressPool.namespace }}
+spec:
+  addresses:
+  - {{ .Values.bgp.ipAddressPool.address }}
+  avoidBuggyIPs: {{ .Values.bgp.ipAddressPool.avoidBuggyIPs }}
+---
+apiVersion: metallb.io/v1beta2
+kind: BGPPeer
+metadata:
+  name: {{ .Values.bgp.bgpPeer.name }}
+  namespace: {{ .Values.bgp.bgpPeer.namespace }}
+spec:
+  myASN: {{ .Values.bgp.bgpPeer.myASN }}
+  peerASN: {{ .Values.bgp.bgpPeer.peerASN }}
+  peerAddress: {{ .Values.bgp.bgpPeer.peerAddress }}
+---
+apiVersion: metallb.io/v1beta1
+kind: BGPAdvertisement
+metadata:
+  name: {{ .Values.bgp.bgpAdvertisement.name }}
+  namespace: {{ .Values.bgp.bgpAdvertisement.namespace }}
+{{- end }}

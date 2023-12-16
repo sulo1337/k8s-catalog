@@ -1,0 +1,9 @@
+gitops:
+  repo: git@github.com:tickerwolf/k8s-cluster.git
+  revision: master
+stacks:
+  - name: platform-apps
+  - name: operators
+  - name: db
+  - name: storage
+  - name: user-apps
