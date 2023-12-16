@@ -6,7 +6,9 @@ metadata:
   namespace: {{ .Values.l2.ipAddressPool.namespace }}
 spec:
   addresses:
-  - {{ .Values.l2.ipAddressPool.address }}
+  {{- range .Values.l2.ipAddressPool.addresses }}
+    - {{ . }}
+  {{- end }}
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement

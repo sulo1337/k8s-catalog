@@ -7,7 +7,9 @@ metadata:
   namespace: {{ .Values.bgp.ipAddressPool.namespace }}
 spec:
   addresses:
-  - {{ .Values.bgp.ipAddressPool.address }}
+  {{- range .Values.l2.ipAddressPool.addresses }}
+    - {{ . }}
+  {{- end }}
   avoidBuggyIPs: {{ .Values.bgp.ipAddressPool.avoidBuggyIPs }}
 ---
 apiVersion: metallb.io/v1beta2

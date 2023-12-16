@@ -5,7 +5,8 @@ bgp:
   ipAddressPool:
     name: bgp-pool
     namespace: metallb-system
-    address: 192.168.100.0/24
+    address: 
+      - 192.168.100.0/24
     avoidBuggyIPs: true
   bgpPeer:
     name: bgppeer
@@ -22,7 +23,8 @@ l2:
   ipAddressPool:
     name: l2-pool
     namespace: metallb-system
-    address: 192.168.100.0/24
+    addresses: 
+      - 192.168.100.0/24
   l2Advertisement:
     name: l2ad
     namespace: metallb-system
