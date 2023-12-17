@@ -1,38 +1,40 @@
+{{- range .Values.ingresses }}
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: {{ .Values.certificate.name }}
-  namespace: {{ .Values.namespace }}
+  name: {{ .certificate.name }}
+  namespace: {{ .namespace }}
 spec:
-  secretName: {{ .Values.certificate.secretName }}
+  secretName: {{ .certificate.secretName }}
   issuerRef:
-    name: {{ .Values.certificate.issuer }}
+    name: {{ .certificate.issuer }}
     kind: ClusterIssuer
-  commonName: {{ .Values.fqdn }}
+  commonName: {{ .fqdn }}
   dnsNames:
-  - {{ .Values.fqdn }}
+  - {{ .fqdn }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress  
 metadata:
-  name: {{ .Values.ingress.name }}
-  namespace: {{ .Values.namespace }}
+  name: {{ .name }}
+  namespace: {{ .namespace }}
   annotations:
-    kubernetes.io/ingress.class: {{ .Values.ingress.class }}
+    kubernetes.io/ingress.class: {{ .class }}
 spec:
   tls:
   - hosts:
-    - {{ .Values.fqdn }}
-    secretName: {{ .Values.certificate.secretName }}
+    - {{ .fqdn }}
+    secretName: {{ .certificate.secretName }}
   rules:
-  - host: {{ .Values.fqdn }}
+  - host: {{ .fqdn }}
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: {{ .Values.service.name }}
-            namespace: {{ .Values.service.namespace }}
+            name: {{ .service.name }}
             port: 
-              number: {{ .Values.service.port }}
+              number: {{ .service.port }}
+{{- end }}

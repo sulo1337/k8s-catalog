@@ -1,12 +1,23 @@
-fqdn: ingress-domain.example.com
-namespace: ingress
-ingress:
-  name: ingress-domain
-  class: nginx
-service:
-  name: ingress-domain-svc
-  namespace: ingress-domain-svc-namespace
-  port: 80
-certificate:
-  name: ingress-domain-cert
-  issuer: letsencrypt-stag
+ingresses:
+  - name: ingress-1
+    namespace: namespace-1
+    class: nginx
+    fqdn: ingress-1.example.com
+    service:
+      name: service
+      port: 80
+    certificate:
+      name: ingress-1-cert
+      secretName: ingress-1-cert
+      issuer: letsencrypt-stag
+  - name: ingress-2
+    namespace: namespace-2
+    class: nginx
+    fqdn: ingress-2.example.com
+    service:
+      name: service
+      port: 80
+    certificate:
+      name: ingress-2-cert
+      secretName: ingress-2-cert
+      issuer: letsencrypt-stag
